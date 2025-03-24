@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Anuncios de Coches
 
-## Getting Started
+Este proyecto es una aplicación web para la visualización de anuncios de coches. La aplicación está desarrollada utilizando Next.js y Tailwind CSS, y está desplegada en Vercel.
 
-First, run the development server:
+## Descripción
 
-```bash
+La aplicación permite a los usuarios ver los anuncios de coches publicados. Durante el desarrollo, se tomaron las siguientes decisiones:
+
+- **Next.js**: Se eligió Next.js por su capacidad para renderizar en el lado del servidor y su facilidad de configuración.
+- **Tailwind CSS**: Se utilizó Tailwind CSS para el diseño de la interfaz de usuario debido a su flexibilidad y facilidad de uso.
+- **Vercel**: Se eligió Vercel para el despliegue debido a su integración perfecta con Next.js y su capacidad para manejar despliegues continuos.
+
+## Instalación
+
+Para instalar y configurar la aplicación localmente, sigue estos pasos:
+
+1. Clona el repositorio:
+    ```sh
+    git clone https://github.com/nicolaspizzolante/anuncios-de-coches.git
+    ```
+
+2. Navega al directorio del proyecto:
+    ```sh
+    cd anuncios-de-coches
+    ```
+
+3. Instala las dependencias:
+    ```sh
+    npm install
+    ```
+
+## Ejecución
+
+Para ejecutar la aplicación en modo de desarrollo, utiliza el siguiente comando:
+
+```sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
