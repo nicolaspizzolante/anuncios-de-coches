@@ -92,7 +92,7 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
                             header.getContext()
                           )}
 
-                        {header.column.columnDef.meta?.sortIcon && (
+                        {(header.column.columnDef.meta as { sortIcon?: boolean })?.sortIcon && (
                           <span className="inline-flex ml-1">
                             <ArrowUp
                               size={14}

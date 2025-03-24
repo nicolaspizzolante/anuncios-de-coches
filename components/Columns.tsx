@@ -1,7 +1,11 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Announcement } from '@/types/index'
 
-export const columns: ColumnDef<Announcement>[] = [
+interface CustomColumnMeta {
+  sortIcon?: boolean
+}
+
+export const columns: ColumnDef<Announcement, any>[] = [
   {
     header: 'ID',
     accessorKey: 'id'
@@ -13,7 +17,7 @@ export const columns: ColumnDef<Announcement>[] = [
     enableSorting: true,
     meta: {
       sortIcon: true,
-    },
+    } as CustomColumnMeta,
   },
   {
     header: 'Modelo',
@@ -30,7 +34,7 @@ export const columns: ColumnDef<Announcement>[] = [
     enableSorting: true,
     meta: {
       sortIcon: true,
-    },
+    } as CustomColumnMeta,
     cell: ({ getValue }) => {
       const price = getValue<number>()
       return new Intl.NumberFormat('es-ES', {
