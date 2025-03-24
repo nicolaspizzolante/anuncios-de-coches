@@ -53,7 +53,7 @@ export default function AnnouncementsTable({ data }) {
       <div className="flex items-center py-4">
         {/* Input de texto para filtrar por marca o modelo */}
         <Input
-          placeholder="Filtrar por marca o modelo..."
+          placeholder="Filtrar por marca, modelo o versión..."
           value={table.getState().globalFilter ?? ""}
           onChange={(e) => table.setGlobalFilter(e.target.value)}
           className="max-w-sm"
