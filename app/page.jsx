@@ -21,7 +21,7 @@ const HomePage = async () => {
       <main className="w-full flex flex-col gap-2">
         <ThemeToggle />
         <h1 className='text-3xl font-bold text-center sm:text-left'>
-          Nuestros coches
+          Anuncios de coches
         </h1>
         <div className="w-full overflow-x-auto">
           <AnnouncementsTable data={filteredAnnouncements} />
