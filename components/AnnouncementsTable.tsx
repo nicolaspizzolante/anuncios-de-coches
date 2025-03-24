@@ -19,21 +19,7 @@ import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../components/ui/table"
 import { columns } from './Columns'
-
-interface Announcement {
-  id: string
-  make: string
-  model: string
-  trim: string
-  salePriceGross: number
-  firstRegistrationDate: string
-  mileage: number
-  gearbox: "Automática" | "Manual"
-}
-
-interface AnnouncementsTableProps {
-  data: Announcement[]
-}
+import { Announcement, AnnouncementsTableProps } from '@/types/index'
 
 export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
   const [sorting, setSorting] = useState<SortingState>([])

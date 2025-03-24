@@ -1,15 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table"
-
-interface Announcement {
-  id: string
-  make: string
-  model: string
-  trim: string
-  salePriceGross: number
-  firstRegistrationDate: string
-  mileage: number
-  gearbox: "Automática" | "Manual"
-}
+import { Announcement } from '@/types/index'
 
 export const columns: ColumnDef<Announcement>[] = [
   {

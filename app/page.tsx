@@ -1,34 +1,7 @@
-import AnnouncementsTable from '../components/AnnouncementsTable';
-import ThemeToggle from '../components/ThemeToggle';
-import { Alert, AlertDescription, AlertTitle } from '../components/ui/alert';
-
-interface Announcement {
-  id: string;
-  make: string;
-  model: string;
-  trim: string;
-  salePriceGross: number;
-  firstRegistrationDate: string;
-  mileage: number;
-  gearbox: "Automática" | "Manual";
-}
-
-interface ApiResponse {
-  announcements: {
-    announcements: Array<{
-      id: string;
-      make: string;
-      model: string;
-      trim: string;
-      salePriceGross: number;
-      firstRegistrationDate: string;
-      details: {
-        mileage: number;
-        gearbox: string;
-      };
-    }>;
-  };
-}
+import AnnouncementsTable from '@/components/AnnouncementsTable';
+import ThemeToggle from '@/components/ThemeToggle';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Announcement, ApiResponse } from '@/types/index'
 
 const fetchAnnouncements = async (): Promise<Announcement[]> => {
   try {
