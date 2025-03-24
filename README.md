@@ -8,6 +8,7 @@ La aplicación permite a los usuarios ver los anuncios de coches publicados. Dur
 
 - **Next.js**: Se eligió Next.js por su capacidad para renderizar en el lado del servidor y su facilidad de configuración.
 - **Tailwind CSS**: Se utilizó Tailwind CSS para el diseño de la interfaz de usuario debido a su flexibilidad y facilidad de uso.
+- **shadcn/ui**: Se utilizaron componentes de shadcn/ui para mejorar la funcionalidad y el diseño de la aplicación.
 - **Vercel**: Se eligió Vercel para el despliegue debido a su integración perfecta con Next.js y su capacidad para manejar despliegues continuos.
 
 ## Instalación
