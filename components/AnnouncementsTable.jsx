@@ -51,9 +51,9 @@ export default function AnnouncementsTable({ data }) {
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-        {/* Input de texto para filtrar por marca o modelo */}
+        {/* Input de texto para filtrar por marca, modelo o versión */}
         <Input
-          placeholder="Filtrar por marca, modelo o versión..."
+          placeholder="Buscar por marca, modelo o versión"
           value={table.getState().globalFilter ?? ""}
           onChange={(e) => table.setGlobalFilter(e.target.value)}
           className="max-w-sm"
@@ -137,7 +137,7 @@ export default function AnnouncementsTable({ data }) {
       {/* Indicador de cantidad de items que se están mostrando */}
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {Math.min(maxRowsSeen, totalRows)} de {totalRows} fila(s)
+          {Math.min(maxRowsSeen, totalRows)} de {totalRows} anuncio(s)
         </div>
         <div className="space-x-2">
           <Button
