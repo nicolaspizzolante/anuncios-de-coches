@@ -1,16 +1,46 @@
-import AnnouncementsTable from '@/components/AnnouncementsTable';
-import ThemeToggle from '@/components/ThemeToggle';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import AnnouncementsTable from '../components/AnnouncementsTable';
+import ThemeToggle from '../components/ThemeToggle';
+import { Alert, AlertDescription, AlertTitle } from '../components/ui/alert';
 
-const fetchAnnouncements = async () => {
+interface Announcement {
+  id: string;
+  make: string;
+  model: string;
+  trim: string;
+  salePriceGross: number;
+  firstRegistrationDate: string;
+  mileage: number;
+  gearbox: "Automática" | "Manual";
+}
+
+interface ApiResponse {
+  announcements: {
+    announcements: Array<{
+      id: string;
+      make: string;
+      model: string;
+      trim: string;
+      salePriceGross: number;
+      firstRegistrationDate: string;
+      details: {
+        mileage: number;
+        gearbox: string;
+      };
+    }>;
+  };
+}
+
+const fetchAnnouncements = async (): Promise<Announcement[]> => {
   try {
-    const res = await fetch('https://arval-uat-euw-appservice-portalapi.azurewebsites.net/api/Announcements/5?pageNumber=1&pageSize=500', { next: { revalidate: 3600 } });
+    const res = await fetch('https://arval-uat-euw-appservice-portalapi.azurewebsites.net/api/Announcements/5?pageNumber=1&pageSize=500', {
+      next: { revalidate: 3600 }
+    });
 
     if (!res.ok) {
       throw new Error(`HTTP error! Status: ${res.status}`);
     }
 
-    const responseData = await res.json();
+    const responseData: ApiResponse = await res.json();
 
     return responseData.announcements.announcements.map(item => ({
       id: item.id,
@@ -29,13 +59,13 @@ const fetchAnnouncements = async () => {
 };
 
 const HomePage = async () => {
-  let filteredAnnouncements = [];
+  let filteredAnnouncements: Announcement[] = [];
   let errorMessage = '';
 
   try {
     filteredAnnouncements = await fetchAnnouncements();
   } catch (error) {
-    errorMessage = error.message;
+    errorMessage = error instanceof Error ? error.message : 'Ocurrió un error desconocido';
   }
 
   return (

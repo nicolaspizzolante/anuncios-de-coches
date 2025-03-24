@@ -1,4 +1,17 @@
-export const columns = [
+import { ColumnDef } from "@tanstack/react-table"
+
+interface Announcement {
+  id: string
+  make: string
+  model: string
+  trim: string
+  salePriceGross: number
+  firstRegistrationDate: string
+  mileage: number
+  gearbox: "Automática" | "Manual"
+}
+
+export const columns: ColumnDef<Announcement>[] = [
   {
     header: 'ID',
     accessorKey: 'id'
@@ -29,8 +42,11 @@ export const columns = [
       sortIcon: true,
     },
     cell: ({ getValue }) => {
-      const price = getValue();
-      return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(price)
+      const price = getValue<number>()
+      return new Intl.NumberFormat('es-ES', {
+        style: 'currency',
+        currency: 'EUR'
+      }).format(price)
     }
   },
   {
@@ -39,10 +55,14 @@ export const columns = [
   },
   {
     header: 'Kilometraje',
-    accessorKey: 'mileage'
+    accessorKey: 'mileage',
+    cell: ({ getValue }) => {
+      const mileage = getValue<number>()
+      return new Intl.NumberFormat('es-ES').format(mileage)
+    }
   },
   {
     header: 'Caja de cambios',
     accessorKey: 'gearbox'
   }
-];
+]

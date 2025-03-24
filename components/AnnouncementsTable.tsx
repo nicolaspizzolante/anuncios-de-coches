@@ -1,23 +1,50 @@
 "use client"
 
 import { useState } from "react"
-import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table"
-import { ArrowUp, ArrowDown } from 'lucide-react';
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+  ColumnDef,
+  SortingState,
+  ColumnFiltersState,
+  VisibilityState,
+  RowSelectionState
+} from "@tanstack/react-table"
+import { ArrowUp, ArrowDown } from 'lucide-react'
+import { Button } from "../components/ui/button"
+import { Input } from "../components/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../components/ui/table"
 import { columns } from './Columns'
 
-export default function AnnouncementsTable({ data }) {
-  const [sorting, setSorting] = useState([])
-  const [columnFilters, setColumnFilters] = useState([])
-  const [columnVisibility, setColumnVisibility] = useState({})
-  const [rowSelection, setRowSelection] = useState({})
-  const [globalFilter, setGlobalFilter] = useState("");
+interface Announcement {
+  id: string
+  make: string
+  model: string
+  trim: string
+  salePriceGross: number
+  firstRegistrationDate: string
+  mileage: number
+  gearbox: "Automática" | "Manual"
+}
+
+interface AnnouncementsTableProps {
+  data: Announcement[]
+}
+
+export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+  const [globalFilter, setGlobalFilter] = useState<string>("")
 
   const table = useReactTable({
     data,
-    columns,
+    columns: columns as ColumnDef<Announcement>[],
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -28,12 +55,12 @@ export default function AnnouncementsTable({ data }) {
     onGlobalFilterChange: setGlobalFilter,
     getSortedRowModel: getSortedRowModel(),
     globalFilterFn: (row, columnId, filterValue) => {
-      const make = row.getValue("make")?.toString().toLowerCase();
-      const model = row.getValue("model")?.toString().toLowerCase();
-      const trim = row.getValue("trim")?.toString().toLowerCase();
-      const searchTerm = filterValue.toLowerCase();
+      const make = row.getValue("make")?.toString().toLowerCase() ?? ""
+      const model = row.getValue("model")?.toString().toLowerCase() ?? ""
+      const trim = row.getValue("trim")?.toString().toLowerCase() ?? ""
+      const searchTerm = filterValue.toLowerCase()
 
-      return (make.includes(searchTerm) || model.includes(searchTerm) || trim.includes(searchTerm));
+      return (make.includes(searchTerm) || model.includes(searchTerm) || trim.includes(searchTerm))
     },
     initialState: { pagination: { pageSize: 10 } },
     state: {
@@ -45,13 +72,12 @@ export default function AnnouncementsTable({ data }) {
     },
   })
 
-  const maxRowsSeen = (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize;
-  const totalRows = data.length;
+  const maxRowsSeen = (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize
+  const totalRows = data.length
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-        {/* Input de texto para filtrar por marca, modelo o versión */}
         <Input
           placeholder="Buscar por marca, modelo o versión"
           value={table.getState().globalFilter ?? ""}
@@ -60,7 +86,6 @@ export default function AnnouncementsTable({ data }) {
         />
       </div>
 
-      {/* La tabla */}
       <div className="overflow-x-auto">
         <div className="rounded-md border w-full">
           <Table className="min-w-full">
@@ -111,7 +136,10 @@ export default function AnnouncementsTable({ data }) {
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
                         {flexRender(
@@ -124,7 +152,10 @@ export default function AnnouncementsTable({ data }) {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
                     Sin resultados.
                   </TableCell>
                 </TableRow>
@@ -134,7 +165,6 @@ export default function AnnouncementsTable({ data }) {
         </div>
       </div>
 
-      {/* Indicador de cantidad de items que se están mostrando */}
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {Math.min(maxRowsSeen, totalRows)} de {totalRows} anuncio(s)
