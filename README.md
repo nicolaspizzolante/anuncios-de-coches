@@ -35,3 +35,6 @@ Para ejecutar la aplicación en modo de desarrollo, utiliza el siguiente comando
 
 ```sh
 npm run dev
+```
+
+La aplicación estará disponible en http://localhost:3000.
