@@ -5,6 +5,7 @@ export interface Announcement {
   trim: string;
   salePriceGross: number;
   firstRegistrationDate: string;
+  mainImage: string;
   mileage: number;
   gearbox: "Automática" | "Manual";
 }
@@ -22,6 +23,7 @@ export interface ApiResponse {
       trim: string;
       salePriceGross: number;
       firstRegistrationDate: string;
+      mainImage: string,
       details: {
         mileage: number;
         gearbox: string;

@@ -15,9 +15,9 @@ import {
   RowSelectionState
 } from "@tanstack/react-table"
 import { ArrowUp, ArrowDown } from 'lucide-react'
-import { Button } from "../components/ui/button"
-import { Input } from "../components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../components/ui/table"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { columns } from './Columns'
 import { Announcement, AnnouncementsTableProps } from '@/types/index'
 
@@ -60,10 +60,10 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
 
   const filteredRows = table.getFilteredRowModel().rows.length
   const maxRowsSeen = Math.min((table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize, filteredRows)
-  const totalRows = data.length
 
   return (
     <div className="w-full">
+      {/* Input para buscar por marca, modelo o versión */}
       <div className="flex items-center py-4">
         <Input
           placeholder="Buscar por marca, modelo o versión"
@@ -73,6 +73,7 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
         />
       </div>
 
+      {/* La tabla */}
       <div className="overflow-x-auto">
         <div className="rounded-md border w-full">
           <Table className="min-w-full">
@@ -152,6 +153,7 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
         </div>
       </div>
 
+      {/* Contador de anuncios mostrados por pagina y botones Anterior y Siguiente*/}
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {Math.min(maxRowsSeen, filteredRows)} de {filteredRows} anuncio(s)

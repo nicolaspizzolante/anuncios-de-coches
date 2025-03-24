@@ -5,15 +5,15 @@ import { Announcement, ApiResponse } from '@/types/index'
 
 const fetchAnnouncements = async (): Promise<Announcement[]> => {
   try {
-    const res = await fetch('https://arval-uat-euw-appservice-portalapi.azurewebsites.net/api/Announcements/5?pageNumber=1&pageSize=500', {
-      next: { revalidate: 3600 }
-    });
+    const res = await fetch('https://arval-uat-euw-appservice-portalapi.azurewebsites.net/api/Announcements/5?pageNumber=1&pageSize=500');
 
     if (!res.ok) {
       throw new Error(`HTTP error! Status: ${res.status}`);
     }
 
     const responseData: ApiResponse = await res.json();
+
+    console.log('Announcements:', responseData.announcements.announcements);
 
     return responseData.announcements.announcements.map(item => ({
       id: item.id,
@@ -22,6 +22,7 @@ const fetchAnnouncements = async (): Promise<Announcement[]> => {
       trim: item.trim,
       salePriceGross: item.salePriceGross,
       firstRegistrationDate: item.firstRegistrationDate,
+      mainImage: item.mainImage,
       mileage: item.details.mileage,
       gearbox: item.details.gearbox === "Automatique" ? "Automática" : "Manual"
     }));

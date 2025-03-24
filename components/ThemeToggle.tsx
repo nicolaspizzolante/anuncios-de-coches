@@ -7,7 +7,6 @@ const ThemeToggle = () => {
   const [darkMode, setDarkMode] = useState<boolean>(false)
 
   useEffect(() => {
-    // Verificar si estamos en el cliente (window está disponible)
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('darkMode') === 'true'
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
