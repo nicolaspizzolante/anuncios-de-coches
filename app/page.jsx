@@ -20,7 +20,7 @@ const fetchAnnouncements = async () => {
       salePriceGross: item.salePriceGross,
       firstRegistrationDate: item.firstRegistrationDate,
       mileage: item.details.mileage,
-      gearbox: item.details.gearbox
+      gearbox: item.details.gearbox === "Automatique" ? "Automática" : "Manual"
     }));
   } catch (error) {
     console.error('Error fetching announcements:', error);
@@ -56,7 +56,6 @@ const HomePage = async () => {
             <AnnouncementsTable data={filteredAnnouncements} />
           </div>
         )}
-
       </main>
     </div>
   );
