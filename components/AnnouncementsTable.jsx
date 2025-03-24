@@ -30,9 +30,10 @@ export default function AnnouncementsTable({ data }) {
     globalFilterFn: (row, columnId, filterValue) => {
       const make = row.getValue("make")?.toString().toLowerCase();
       const model = row.getValue("model")?.toString().toLowerCase();
+      const trim = row.getValue("trim")?.toString().toLowerCase();
       const searchTerm = filterValue.toLowerCase();
 
-      return (make.includes(searchTerm) || model.includes(searchTerm))
+      return (make.includes(searchTerm) || model.includes(searchTerm) || trim.includes(searchTerm));
     },
     initialState: { pagination: { pageSize: 10 } },
     state: {
