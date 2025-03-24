@@ -58,7 +58,8 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
     },
   })
 
-  const maxRowsSeen = (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize
+  const filteredRows = table.getFilteredRowModel().rows.length
+  const maxRowsSeen = Math.min((table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize, filteredRows)
   const totalRows = data.length
 
   return (
@@ -153,7 +154,7 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
 
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {Math.min(maxRowsSeen, totalRows)} de {totalRows} anuncio(s)
+          {Math.min(maxRowsSeen, filteredRows)} de {filteredRows} anuncio(s)
         </div>
         <div className="space-x-2">
           <Button
