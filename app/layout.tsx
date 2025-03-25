@@ -10,8 +10,8 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Anuncios de coches",
-  description: "Anuncios de coches",
-  keywords: "coches, anuncios"
+  description: "Encuentra los mejores anuncios de coches usados y nuevos.",
+  keywords: "coches, anuncios, coches usados, venta de coches, compra de coches, anuncios de vehículos, coches en venta, coches de segunda mano, autos, automóviles, vehículos, mercado de coches, clasificados de coches, coches baratos, coches nuevos, coches de ocasión"
 };
 
 export default function RootLayout({
