@@ -14,7 +14,7 @@ import {
   VisibilityState,
   RowSelectionState
 } from "@tanstack/react-table"
-import { ArrowUp, ArrowDown } from 'lucide-react'
+import { ArrowUp, ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -50,8 +50,8 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
     },
     initialState: { pagination: { pageSize: 10 } },
     state: {
-      globalFilter,
       sorting,
+      globalFilter,
       columnFilters,
       columnVisibility,
       rowSelection,
@@ -98,19 +98,11 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
                           <span className="inline-flex ml-1">
                             <ArrowUp
                               size={14}
-                              className={
-                                header.column.getIsSorted() === 'asc'
-                                  ? 'text-gray-800'
-                                  : 'text-gray-300'
-                              }
+                              className={header.column.getIsSorted() === 'asc' ? 'text-gray-800' : 'text-gray-300'}
                             />
                             <ArrowDown
                               size={14}
-                              className={
-                                header.column.getIsSorted() === 'desc'
-                                  ? 'text-gray-800'
-                                  : 'text-gray-300'
-                              }
+                              className={header.column.getIsSorted() === 'desc' ? 'text-gray-800' : 'text-gray-300'}
                               style={{ marginLeft: '-3px' }}
                             />
                           </span>
@@ -124,10 +116,7 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
+                  <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
                         {flexRender(
@@ -140,10 +129,7 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
                     Sin resultados.
                   </TableCell>
                 </TableRow>
@@ -158,13 +144,14 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
         <div className="flex-1 text-sm text-muted-foreground">
           {Math.min(maxRowsSeen, filteredRows)} de {filteredRows} anuncio(s)
         </div>
-        <div className="space-x-2">
+        <div className="flex space-x-2">
           <Button
             variant="outline"
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
+            <ChevronLeft />
             Anterior
           </Button>
           <Button
@@ -174,6 +161,7 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
             disabled={!table.getCanNextPage()}
           >
             Siguiente
+            <ChevronRight />
           </Button>
         </div>
       </div>
