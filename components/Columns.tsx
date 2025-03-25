@@ -106,7 +106,6 @@ export const columns: ColumnDef<Announcement, any>[] = [
               {isLoading && (
                 <div className="flex justify-center items-center py-4">
                   <Loader2 className="animate-spin h-6 w-6 text-gray-500" />
-                  <span className="ml-2 text-gray-500">Cargando imagen...</span>
                 </div>
               )}
               <img
