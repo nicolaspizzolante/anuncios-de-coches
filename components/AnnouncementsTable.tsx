@@ -9,10 +9,7 @@ import {
   getSortedRowModel,
   useReactTable,
   ColumnDef,
-  SortingState,
-  ColumnFiltersState,
-  VisibilityState,
-  RowSelectionState
+  SortingState
 } from "@tanstack/react-table"
 import { ArrowUp, ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
@@ -23,23 +20,17 @@ import { Announcement, AnnouncementsTableProps } from '@/types/index'
 
 export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
   const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
   const [globalFilter, setGlobalFilter] = useState<string>("")
 
   const table = useReactTable({
     data,
     columns: columns as ColumnDef<Announcement>[],
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: setGlobalFilter,
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     globalFilterFn: (row, columnId, filterValue) => {
       const make = row.getValue("make")?.toString().toLowerCase() ?? ""
       const model = row.getValue("model")?.toString().toLowerCase() ?? ""
@@ -51,10 +42,7 @@ export default function AnnouncementsTable({ data }: AnnouncementsTableProps) {
     initialState: { pagination: { pageSize: 10 } },
     state: {
       sorting,
-      globalFilter,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
+      globalFilter
     },
   })
 
