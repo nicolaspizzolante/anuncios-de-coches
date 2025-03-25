@@ -13,8 +13,6 @@ const fetchAnnouncements = async (): Promise<Announcement[]> => {
 
     const responseData: ApiResponse = await res.json();
 
-    console.log('Announcements:', responseData.announcements.announcements);
-
     return responseData.announcements.announcements.map(item => ({
       id: item.id,
       make: item.make,
